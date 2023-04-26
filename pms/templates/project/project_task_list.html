@@ -1,0 +1,126 @@
+{% extends './base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  {% block content %}
+  <div class="page-header mt-2">
+    <div class="row row-deck">
+      <div class="col-md-6">
+        <h3 class="page-title">TASKS LIST</h3>
+      </div>
+      <div class="col-md-6">
+        <div class="page-right">
+          <div>
+            <a href="{% url 'create_project_task' %}" class="btn btn btn-success" style="float: right;">Add Task</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 mt-3">
+    <div class="card">
+      <div class="card-body">
+
+
+
+        <div class="table-responsive text-nowrap">
+          <table class="table table-vcenter table hover mb-0">
+            <thead>
+              <tr>
+                <!-- <th>Projects</th>
+                <th>Modules</th> -->
+                <th>Title</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Total Mins</th>
+                <th>Actions</th>
+
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              {% for project in project_task_list %}
+              <tr>
+                <!-- <td class="align-middle">
+
+                  <i class="fas fa-angle-right fa-lg  me-3"></i>
+
+                  <strong>{{project.project}}</strong>
+
+                </td>
+                <td class="align-middle">{{project.module}}</td> -->
+                <td class="align-middle"><i class="fas fa-angle-right fa-lg  me-3"></i>
+                  <strong>{{project.title}}</strong>
+                </td>
+
+                <td class="align-middle">
+                  {% if project.status == 'Completed' %}
+                  <span class="badge bg-label-primary me-1">{{project.status}}</span>
+
+                  {% elif project.status == 'Pending' %}
+                  <span class="badge bg-label-danger me-1">{{project.status}}</span>
+
+                  {% else %}
+                  <span class="badge bg-label-dark me-1">{{project.status}}</span>
+                  
+                  {% endif %}
+
+
+
+                </td>
+
+                <td class="align-middle">{{project.description}}</td>
+
+                <td class="align-middle">
+
+                  {% if project.priority == 'High' %}
+                  <span class="badge bg-danger me-1">{{project.priority}}</span>
+                  {% elif project.priority == 'Low' %}
+                  <span class="badge bg-success me-1">{{project.priority}}</span>
+                  {% else %}
+                  <span class="badge bg-warning me-1">{{project.priority}}</span>
+                  {% endif %}
+
+                </td>
+                <td class="align-middle">{{project.totalminutes}}</td>
+
+
+                <td class="align-middle">
+
+                  <div class="dropdown">
+                    <a class="dropdown-item" href="{% url 'update_task' project.id %}"><i
+                        class="bx bx-edit-alt me-1 text-primary"></i> Edit</a>
+                    <a class="dropdown-item" href="{% url 'delete_task' project.id %}"><i
+                        class="bx bx-trash me-1 text-danger"></i> Delete</a>
+                    <a class="dropdown-item" href="{% url 'assign_task' project.id %}"><i
+                        class="bx bx-detail me-1 text-warning"></i> Assign</a>
+                  </div>
+                </td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  {% endblock content %}
+
+
+</body>
+
+</html>

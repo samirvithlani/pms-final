@@ -1,0 +1,136 @@
+{% extends './base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    {% block content %}
+    {% comment %} <h2><strong>Project Tasks</strong></h2>
+    <a href="{% url 'assign_project_task' %}" class="btn btn-primary">Assign Task</a> {% endcomment %}
+
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Task</th>
+              
+              
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            
+            {% for project in project_task_list_assign %}
+            <tr>
+              <td>
+                <i class="fas fa-angle-right fa-lg  me-3"></i>
+                <strong>{{project.user}}</strong>
+              </td>
+              <td>{{project.taskid}}</td>
+              
+              {% comment %} <td>{{module.estimatedHrs}}</td>
+              
+              <td><span class="badge bg-label-primary me-1">Active</span></td> {% endcomment %}
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+      {% comment %} <h5 class="card-header">Projects</h5>
+      <h5 class="card-header">
+        <a href="{% url 'create_project_module' %}" class="btn btn-primary">Create Module</a>
+      </h5> {% endcomment %}
+      {% comment %} <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Project</th>
+              <th>Status</th>
+              <th>Title</th>
+              <th>Priority</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for project in project_task_list %}
+            <tr>
+              <td>
+                
+                <i class="fas fa-angle-right fa-lg  me-3"></i>
+                
+                <strong>{{project.module}}</strong>
+                
+              </td>
+              <td>{{project.project}}</td>
+
+              <td>
+
+                {% if project.status == 'Active' %}
+                <span class="badge bg-label-primary me-1">{{project.status}}</span>
+                {% elif project.status == 'Pending' %}
+                <span class="badge bg-label-warning me-1">{{project.status}}</span>
+                {% elif project.status == 'Done' %}
+                <span class="badge bg-label-success me-1">{{project.status}}</span>
+                {% else %}
+                <span class="badge bg-label-dark me-1">{{project.status}}</span>
+                {% endif %}
+                
+                
+
+              </td>
+
+              <td>{{project.title}}</td>
+
+              <td>
+                {% if project.priority == 'high' %}
+                <span class="badge bg-danger me-1">{{project.priority}}</span>
+                {% elif project.priority == 'low' %}
+                <span class="badge bg-success me-1">{{project.priority}}</span>
+                {% else %}
+                <span class="badge bg-warning me-1">{{project.priority}}</span>
+                {% endif %}
+                
+              </td>
+              <td>{{project.desc}}</td>
+              
+              
+              <td>
+                
+                <div class="dropdown">
+                    <a class="dropdown-item" href="{% url 'update_task' project.id %}"
+                      ><i class="bx bx-edit-alt me-1 text-primary"></i> Edit</a
+                    >
+                    <a class="dropdown-item" href="{% url 'delete_task' project.id %}"
+                      ><i class="bx bx-trash me-1 text-danger"></i> Delete</a
+                    >
+                    <a class="dropdown-item" href="{% url 'assign_task' project.id %}"
+                    ><i class="bx bx-detail me-1 text-warning"></i> Assign</a
+                  >
+                </div>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div> {% endcomment %}
+
+
+    {% endblock content %}
+        
+    
+</body>
+</html>

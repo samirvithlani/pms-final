@@ -1,0 +1,190 @@
+{% extends './base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/fonts/boxicons.css' %}" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/core.css'%}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/theme-default.css'%}"
+    class="template-customizer-theme-css" />
+
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/demo.css'%}" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css'%}" />
+
+  <link rel="stylesheet" href="{% static '/assets/vendor/libs/apex-charts/apex-charts.css'%}" />
+
+  <!-- Page CSS -->
+</head>
+
+<body>
+
+  {% block content %}
+  
+  <div id="layoutSidenav_content">
+ 
+    <main>
+      <div class="container-fluid px-1">
+        <h2 class="mt-2">Welcome, {{ request.user.username }}!</h2>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div>
+          <div class="row">
+            <div class="col-md-3">
+              <div  id="firstcard">
+                <div class="card-body" style="background: linear-gradient(to bottom right, #020024, #f4dc22); transition: 0.3s;">
+                  <h5 class="card-title fw-semibold  text-white 5">Completed Tasks</h5>
+                  <div>
+                    <p class="card-text fw-bold fs-4 mb-0 pt-1 text-white">{{completed_task}}</p>
+                    <p class="card-text pb-1  text-white">Task Count</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body" style="background: linear-gradient(to bottom right, #020024, #f4dc22);">
+                  <h5 class="card-title fw-semibold text-white ">In Progress Tasks</h5>
+                  <div>
+                    <p class="card-text fw-bold fs-4 mb-0 pt-1 text-white">{{progress_task}}</p>
+                    <p class="card-text pb-1 text-white">Task Count</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body" style="background: linear-gradient(to bottom right, #020024, #f4dc22);">
+                  <h5 class="card-title fw-semibold text-white">Pending Tasks</h5>
+                  <div>
+                    <p class="card-text fw-bold fs-4 mb-0 pt-1 text-white">{{pending_task}}</p>
+                    <p class="card-text pb-1 text-white">Task Count</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body" style="background: linear-gradient(to bottom right, #020024, #f4dc22);">
+                  <h5 class="card-title fw-semibold text-white">Total Tasks</h5>
+                  <div>
+                    <p class="card-text fw-bold fs-4 mb-0 pt-1 text-white">{{task_count}}</p>
+                    <p class="card-text pb-1 text-white">Task Count</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title font-weight-bold text-dark text-center">Tasks List</h4>
+            <div class="table-responsive">
+              <table class="table table-hover table-vcenter text-nowrap">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    {% comment %} <th>Status</th>
+                    <th>Priority</th> {% endcomment %}
+                  </tr>
+
+                </thead>
+                <tbody>
+                  {% for user_task in user_tasks %}
+                  <tr>
+                  <td>
+                    <h6><a href="{% url 'detail_task' user_task.taskid.id %}" style="text-decoration : none; color:black">{{user_task.taskid.title}}</a></h6>
+                    <span>{{user_task.taskid.description}}</span>
+                  </td>
+                  <td>
+                    {% if user_task.taskid.priority == 'High' %}
+                  <span class="badge bg-danger me-1">{{user_task.taskid.priority}}</span>
+                  {% elif user_task.taskid.priority == 'Low' %}
+                  <span class="badge bg-success me-1">{{user_task.taskid.priority}}</span>
+                  {% else %}
+                  <span class="badge bg-warning me-1">{{user_task.taskid.priority}}</span>
+                  {% endif %}
+                  </td>
+
+                  <td>{{user_task.taskid.status}}</td>
+                  {% endfor %}
+                </tr>
+                  {% comment %} <td>  
+                    <h6 class="mb-0">New code Update on github</h6>
+                    <span>It is a long established fact that a reader will be distracted...</span>
+                  </td> {% endcomment %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">All task by priority</h5>
+            <canvas id="pie-chart3" width="100px" height="100px"></canvas>
+            <script type="">
+              var config2 = {
+                  type: 'doughnut',
+                  data: {
+                    datasets: [{
+                      data: [{{ high_priority }}, {{ low_priority }}, {{ normal_priority }}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)',
+                      ],
+                      label: 'Population'
+                    }],
+                    labels: ["High Priority", "Low Priority", "Normal Priority"],
+                  },
+                  options: {
+                    responsive: true,
+                    cutoutPercentage: 70
+                  }
+                };
+            
+                window.onload = function() {
+                  var ctx3 = document.getElementById('pie-chart3').getContext('2d');             
+                  window.myPie = new Chart(ctx3, config2)
+                };
+            
+              </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+{% endblock content %}
+</body>
+
+</html>

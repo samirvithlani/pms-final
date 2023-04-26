@@ -1,0 +1,140 @@
+{% extends './base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/fonts/boxicons.css' %}" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/core.css'%}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/theme-default.css'%}"
+    class="template-customizer-theme-css" />
+
+  <link rel="stylesheet" href="{% static '/assets/vendor/css/demo.css'%}" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="{% static '/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css'%}" />
+
+  <link rel="stylesheet" href="{% static '/assets/vendor/libs/apex-charts/apex-charts.css'%}" />
+
+  <!-- Page CSS -->
+</head>
+
+<body>
+
+  {% block content %}
+
+  <div id="layoutSidenav_content">
+
+    <main>
+      <div class="container-fluid px-1">
+        <h2 class="mt-2">Welcome, {{ request.user.username }}!</h2>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+
+    </main>
+    <div class="row rounded-3 border shadow-lg gap-3" style="padding: 2%; background-color: #edf2f4;">
+      <div class="col">
+        <div class="card text-dark  mb-3" style="max-width: 23rem; min-height: 540px;">
+          <div class="card-header fs-4 text-white fw-semibold" style="background-color: #ef5350;">Pending</div>
+          <div class="card-body pt-3" style="background-color: #fef7f6;">
+            {% for user_task in user_tasks %}
+            {% if user_task.taskid.status == 'Pending' %}
+            <div class="card" style="width: 21rem;">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'detail_task' user_task.taskid.id %}"
+                    style="text-decoration : none; color:black">{{user_task.taskid.title}}</a></h5>
+                <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Description</h6> -->
+                <p class="card-text">{{user_task.taskid.description}}</p>
+                <p>{% if user_task.taskid.priority == 'High' %}
+                  <span class="badge bg-danger me-1">{{user_task.taskid.priority}}</span>
+                  {% elif user_task.taskid.priority == 'Low' %}
+                  <span class="badge bg-success me-1">{{user_task.taskid.priority}}</span>
+                  {% else %}
+                  <span class="badge bg-warning me-1">{{user_task.taskid.priority}}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card text-dark  mb-3" style="max-width: 23rem; min-height: 540px;">
+          <div class="card-header fs-4 text-white fw-semibold" style="background-color: #42a5f5;;">In Progress</div>
+          <div class="card-body pt-3" style="background-color: #e7f3fe;">
+            {% for user_task in user_tasks %}
+            {% if user_task.taskid.status == 'inProgress' %}
+            <div class="card" style="width: 21rem;">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'detail_task' user_task.taskid.id %}"
+                    style="text-decoration : none; color:black">{{user_task.taskid.title}}</a></h5>
+                <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Description</h6> -->
+                <p class="card-text">{{user_task.taskid.description}}</p>
+                <p>{% if user_task.taskid.priority == 'High' %}
+                  <span class="badge bg-danger me-1">{{user_task.taskid.priority}}</span>
+                  {% elif user_task.taskid.priority == 'Low' %}
+                  <span class="badge bg-success me-1">{{user_task.taskid.priority}}</span>
+                  {% else %}
+                  <span class="badge bg-warning me-1">{{user_task.taskid.priority}}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card text-dark  mb-3" style="max-width: 23rem; min-height: 540px;">
+          <div class="card-header fs-4 text-white fw-semibold" style="background-color: #4caf50;">Completed</div>
+          <div class="card-body pt-3" style="background-color: #edf7ee;">
+            {% for user_task in user_tasks %}
+            {% if user_task.taskid.status == 'Completed' %}
+            <div class="card" style="width: 21rem;">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'detail_task' user_task.taskid.id %}"
+                    style="text-decoration : none; color:black">{{user_task.taskid.title}}</a></h5>
+                <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Description</h6> -->
+                <p class="card-text">{{user_task.taskid.description}}</p>
+                <p>{% if user_task.taskid.priority == 'High' %}
+                  <span class="badge bg-danger me-1">{{user_task.taskid.priority}}</span>
+                  {% elif user_task.taskid.priority == 'Low' %}
+                  <span class="badge bg-success me-1">{{user_task.taskid.priority}}</span>
+                  {% else %}
+                  <span class="badge bg-warning me-1">{{user_task.taskid.priority}}</span>
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+  {% endblock content %}
+</body>
+
+</html>

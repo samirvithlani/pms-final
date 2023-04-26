@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% block content %}
+    <div class="card">
+      <h4 class="card-header">PROJECTS TEAM</h4>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>User</th>
+              <th>Technology</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            
+            {% for team in project_team_list %}
+            <tr>
+              <td class="align-middle">
+                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                <strong>{{team.project.title}}</strong>
+              </td>
+              <td class="align-middle"><span class="ms-2">{{team.user.username}}</span></td>
+              <td class="align-middle">{{team.project.technology}}</td>
+              <td class="align-middle"><span class="badge bg-label-primary me-1">Active</span></td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    {% endblock content %}
+        
+    
+</body>
+</html>

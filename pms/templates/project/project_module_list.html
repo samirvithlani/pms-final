@@ -1,0 +1,83 @@
+{% extends './base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  {% block content %}
+  <div class="page-header mt-2">
+    <div class="row row-deck">
+      <div class="col-md-6">
+        <h3 class="page-title">MODULE LIST</h3>
+      </div>
+      <div class="col-md-6">
+        <div class="page-right">
+          <div>
+            <a href="{% url 'create_project_module' %}" class="btn btn btn-primary" style="float: right;">Add Module</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 mt-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive text-nowrap">
+          <table class="table table-vcenter table hover mb-0">
+
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Module Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Estimated Hours</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              {% for project in project_module_list %}
+              <tr>
+                <td class="align-middle">
+                  <i class="fas fa-angle-right fa-lg me-3"></i>
+
+                  <strong>{{project.project}}</strong>
+                </td>
+                <td class="align-middle">{{project.moduelename}}</td>
+                <td class="align-middle">{{project.description}}</td>
+                <td class="align-middle">{{project.estimatedHours}}</td>
+
+                <td class="align-middle">
+                  <div class="dropdown">
+                    <a class="dropdown-item" href="{% url 'update_module' project.id %}"><i
+                        class="bx bx-edit-alt me-1 btn-outline-primary"></i>
+                      Edit</a>
+                    <a class="dropdown-item" href="{% url 'delete_module' project.id %}"><i
+                        class="bx bx-trash me-1 btn-outline-danger"></i>
+                      Delete</a>
+                    <!-- <a class="dropdown-item" href="{% url 'detail_project' project.id %}"
+                    ><i class="bx bx-select me-1"></i> Detail</a
+                  > -->
+                  </div>
+                </td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+      {% endblock content %}
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{% extends './base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    {% block content %}
+
+   
+    <div class="card">
+        <div class="card-body">
+            {% for p in detail %}
+          <h5 class="card-title">{{p.taskid_id__title}}</h5>
+          <p class="card-text">{{p.taskid_id__description}}</p>
+          <ul class="list-group list-group-flush">
+           
+            <li class="list-group-item"><b>Project Name :   </b> {{p.taskid_id__project__title}}</li> 
+            <li class="list-group-item"><b>Start Date   :   </b>{{p.taskid_id__project__startdate}}</li>
+            <li class="list-group-item"><b>End Date :   </b>{{p.taskid_id__project__completionDate}}</li>
+
+            <li class="list-group-item"><b>Priority :   </b> 
+                {% if p.taskid_id__priority == 'high' %}
+                <span class="badge bg-danger me-1">{{p.taskid_id__priority}}</span>
+                {% elif p.taskid_id__priority == 'low' %}
+                <span class="badge bg-success me-1">{{p.taskid_id__priority}}</span>
+                {% else %}
+                <span class="badge bg-warning me-1">{{p.taskid_id__priority}}</span>
+                {% endif %}
+            </li>
+
+            <li class="list-group-item"><b>Status   :   </b>
+                {% if p.taskid_id__status == 'Completed' %}
+                
+                <span class="badge bg-label-success me-1">{{p.taskid_id__status}}</span>
+                
+                {% elif p.taskid_id__status == 'Pending' %}
+                
+                <span class="badge bg-label-warning me-1">{{p.taskid_id__status}}</span>
+                 
+                {% elif p.taskid_id__status == 'inProgress' %}
+                <span class="badge bg-label-primary me-1">{{p.taskid_id__status}}</span>
+              
+                {% else %}
+              
+                <span class="badge bg-label-dark me-1">{{p.taskid.project.status}}</span>
+                {% endif %}
+                </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+            
+
+    {% endblock content %}
+        
+    
+</body>
+</html>

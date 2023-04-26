@@ -1,0 +1,76 @@
+{% extends './base.html' %} {% comment %}
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <input type="submit" value="submit" />
+</form>
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% block content %}
+    {% comment %} <form method="POST">
+      {% csrf_token %} {{form.as_p}}
+      <input type="submit" value="submit" />
+    </form> {% endcomment %}
+
+    <div class="row">
+      <div class="col-xl">
+        <div class="card mb-4">
+          <div
+            class="card-header d-flex justify-content-between align-items-center">
+            
+          </div>
+          <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+              <div class="mb-3">
+                <label class="form-label" for="basic-icon-default-fullname">
+                  <h4>Task Assign</h4>
+                  </label>
+                <div class="input-group input-group-merge">
+                  <span
+                    id="basic-icon-default-fullname2"
+                    class="input-group-text"
+                    ><i class="bx bx-user"></i
+                  ></span>
+                  {% comment %} <input
+                    type="text"
+                    class="form-control"
+                    id="basic-icon-default-fullname"
+                    placeholder="John Doe"
+                    aria-label="John Doe"
+                    aria-describedby="basic-icon-default-fullname2"
+                  /> {% endcomment %}
+                  <div
+                  class="form-control"
+                    id="basic-icon-default-fullname"
+                    placeholder="John Doe"
+                    aria-label="John Doe"
+                    aria-describedby="basic-icon-default-fullname2">
+                  
+                      Task : {{form.taskid}}<br><br>
+                      User : {{form.user}}
+                  
+                  
+                  </div>
+                </div>
+              
+              </div>
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    {% endblock content %}
+  </body>
+  
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Login, Registration & Forgot Form Design</title>
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <body class="bg-white">
+    <div class="container">
+
+        <div class="row justify-content-center wrapper" id="register-box">
+            <div class="col-lg-10 my-auto myShadow">
+              <div class="row">
+                <div class="col-lg-5 d-flex flex-column justify-content-center myColor p-4">
+                    
+                  <h1 class="text-center font-weight-bold text-white">Welcome Back!</h1>
+                  <hr class="my-4 bg-light myHr" />
+                  <p class="text-center font-weight-bolder text-light lead">To keep connected with us please login with your personal info.</p>
+                  <button class="btn btn-outline-light btn-lg font-weight-bolder mt-4 align-self-center myLinkBtn" id="login-link">
+                    <a href="{% url 'login' %}" style="color: black">Sign In</a>
+                  </button>
+                </div>
+                <div class="col-lg-7 bg-white p-4">
+                  <h1 class="text-center font-weight-bold text-primary">Choose Your Role</h1>
+                  <hr class="my-3" />
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-4 mb-0">
+          <div class="d-grid">
+              {% comment %} <input type="submit" value="Get Started" class="btn btn-primary btn-block"> {% endcomment %}
+              {% comment %} <button class="btn btn-outline-light btn-lg font-weight-bolder mt-4 align-self-center myLinkBtn" id="login-link">
+                <input type="submit" value="Get Started" class="btn btn-primary btn-block">
+              </button> {% endcomment %}
+              <div class="form-group">
+                <input type="submit" id="register-btn" value="Get Started" class="btn btn-primary btn-lg btn-block myBtn" />
+              </div>
+            </div>
+    </form> 
+
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+<!-- jQuery CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

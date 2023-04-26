@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Login, Registration & Forgot Form Design</title>
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+
+  <body class="bg-info">
+    <div class="container">
+        
+         <!-- Registration Form Start -->
+       <div class="row justify-content-center wrapper" id="register-box">
+        <div class="col-lg-10 my-auto myShadow">
+          <div class="row">
+            <div class="col-lg-5 d-flex flex-column justify-content-center myColor p-4">
+                
+              <h1 class="text-center font-weight-bold text-white">Welcome Back!</h1>
+              <hr class="my-4 bg-light myHr" />
+              <p class="text-center font-weight-bolder text-light lead">To keep connected with us please login with your personal info.</p>
+              <button class="btn btn-outline-light btn-lg font-weight-bolder mt-4 align-self-center myLinkBtn" id="login-link">
+                <a href="{% url 'login' %}" style="color: black">Sign In</a>
+              </button>
+            </div>
+            <div class="col-lg-7 bg-white p-4">
+              <h1 class="text-center font-weight-bold text-primary">Create Account</h1>
+              <hr class="my-3" />
+
+              <form action="#" method="post" class="px-3" id="register-form">
+                {% csrf_token %}
+                <div class="input-group input-group-lg form-group">
+                  <div class="input-group-prepend">
+                    
+                  </div>
+                  {% comment %} <input type="text" id="name" name="name" class="form-control rounded-0" placeholder="Full Name" required /> {% endcomment %}
+                  <label>Username</label> 
+                  {{form.username}}
+                </div>
+                <div class="input-group input-group-lg form-group">
+                    <div class="input-group-prepend">
+                       
+                      </div>
+                      {% comment %} <input type="email" id="remail" name="email" class="form-control rounded-0" placeholder="E-Mail" required /> {% endcomment %}
+                      <label>Email Address</label> 
+                      {{form.email}}
+                    </div>
+                    <div class="input-group input-group-lg form-group">
+                      <div class="input-group-prepend">
+                        
+                      </div>
+                      {% comment %} <input type="password" id="rpassword" name="password" class="form-control rounded-0" minlength="5" placeholder="Password" required /> {% endcomment %}
+                      <label>Password</label> 
+                      {{form.password1}}
+                    </div>
+                    <div class="input-group input-group-lg form-group">
+                      <div class="input-group-prepend">
+                      
+                      </div>
+                      {% comment %} <input type="password" id="cpassword" name="cpassword" class="form-control rounded-0" minlength="5" placeholder="Confirm Password" required /> {% endcomment %}
+                    
+                      <label>Confirm Paasword</label> 
+                      {{form.password2}}
+                    </div>
+                    <div class="form-group">
+                      <div id="passError" class="text-danger font-weight-bolder"></div>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" id="register-btn" value="Sign Up" class="btn btn-primary btn-lg btn-block myBtn" />
+                    </div>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+
+    </div>
+<!-- jQuery CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

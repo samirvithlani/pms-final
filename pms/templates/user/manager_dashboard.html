@@ -1,0 +1,259 @@
+{% extends './base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/img/favicon/favicon.ico"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link
+      rel="stylesheet"
+      href="{% static '/assets/vendor/fonts/boxicons.css' %}"
+    />
+
+    <!-- Core CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static '/assets/vendor/css/core.css'%}"
+      class="template-customizer-core-css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static '/assets/vendor/css/theme-default.css'%}"
+      class="template-customizer-theme-css"
+    />
+
+    <link rel="stylesheet" href="{% static '/assets/vendor/css/demo.css'%}" />
+
+    <!-- Vendors CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static '/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css'%}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static '/assets/vendor/libs/apex-charts/apex-charts.css'%}"
+    />
+
+    <!-- Page CSS -->
+  </head>
+
+  <body>
+    {% block content %}
+
+    <div id="layoutSidenav_content">
+      <main>
+          <div class="container-fluid px-1">
+              <h2 class="mt-2">Welcome Admin!</h2>
+              <ol class="breadcrumb mb-4">
+                  <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+              <div class="row">
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                          <div class="card-body row">
+                            <div class="ps-4 col-6 fs-3"> <i class="fa-solid fa-cubes"></i></div>
+                            <div class="text-end col-6 text-nowrap fs-3"> Projects</div>
+                          </div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="{% url 'project_list' %}">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                        <div class="card-body row">
+                          <div class="ps-4 col-6 fs-3"> <i class="fa-solid fa-people-group"></i></div>
+                          <div class="text-end col-6 text-nowrap fs-3"> Teams</div>
+                        </div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="{% url 'project_team_list' %}">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                        <div class="card-body row">
+                          <div class="ps-4 col-6 fs-3"> <i class="fa-solid fa-diagram-project"></i></div>
+                          <div class="text-end col-6 text-nowrap fs-3"> Modules</div>
+                        </div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="{% url 'project_module_list' %}">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                        <div class="card-body row">
+                          <div class="ps-4 col-6 fs-3"> <i class="fa-solid fa-list-check"></i></div>
+                          <div class="text-end col-6 text-nowrap fs-3"> Tasks </div>
+                        </div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="{% url 'projectask_list' %}">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+      </main>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <div class ="card">
+            <div class ="card-body">
+              <h3 class ="card-title">Estimated Time</h3>
+              <canvas id="pie-chart1" width="569px" height="342px"></canvas>
+              <script type="">
+                var config = {
+                  type: 'horizontalBar',
+                  data: {
+                    datasets: [{
+                      data: {{ data|safe }},
+                      backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(255, 159, 64, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(255, 205, 86, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(201, 203, 207, 0.2)'
+                      ],
+                      borderColor: [
+                      'rgb(255, 99, 132)',
+                      'rgb(255, 159, 64)',
+                      'rgb(153, 102, 255)',
+                      'rgb(75, 192, 192)',
+                      'rgb(255, 205, 86)',
+                      'rgb(54, 162, 235)',
+                      'rgb(201, 203, 207)'
+                      ],
+                      borderWidth: 1,
+                      label: 'Estimated Hours'
+                    }],
+                    labels: {{ labels|safe }}
+                  },
+                  options: {
+                    responsive: true
+                  }
+                };
+            
+                var config1 = {
+                  type: 'doughnut',
+                  data: {
+                    datasets: [{
+                      data: [{{ project_count }}, {{ module_count }}, {{ task_count }}],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)',
+                      ],
+                      label: 'Population'
+                    }],
+                    labels: ['Projects', 'Modules', 'Tasks'],
+                  },
+                  options: {
+                    responsive: true
+                  }
+                };
+            
+                window.onload = function() {
+                  var ctx = document.getElementById('pie-chart1').getContext('2d');
+                  var ctx2 = document.getElementById('pie-chart2').getContext('2d');
+                  window.myPie = new Chart(ctx, config);
+                  window.myPie = new Chart(ctx2, config1)
+                };
+            
+              </script>
+              
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <div class="card">
+            <div class="card-body">
+              <h3 class ="card-title">Total Projects</h3>
+
+              <canvas id="pie-chart2" width="569px" height="342px"></canvas>
+              
+            </div>
+          </div>     
+      </div>
+      
+  
+  
+  </div>
+    <!-- <div class="card">
+      <h4 class="card-header">PROJECTS</h4>
+      <h5 class="card-header">
+        <a href="{% url 'create_project' %}" class="btn btn-primary">Create</a>
+      </h5>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>DESCRIPTION</th>
+              <th>Technology</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for project in projects %}
+            <tr>
+              <td>
+                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                <strong>{{project.title}}</strong>
+              </td>
+              <td>{{project.description}}</td>
+              <td>{{project.technology}}</td>
+              <td><span class="badge bg-label-primary me-1">Active</span></td>
+              <td>
+                <div class="dropdown">
+                  <a class="dropdown-item" href="{% url 'update_project' project.id %}"
+                    ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                  >
+                  <a class="dropdown-item" href="{% url 'delete_project' project.id %}"
+                    ><i class="bx bx-trash me-1"></i> Delete</a
+                  >
+                  <a class="dropdown-item" href="{% url 'detail_project' project.id %}"
+                    ><i class="bx bx-select me-1"></i> Detail</a
+                  >
+                </div>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+    {% endblock content %} {% comment %}
+    <div class="layout-wrapper layout-content-  bar">
+      <div class="layout-container">
+        <div class="content-wrapper">
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <h1>ok</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endcomment %}
+  </body>
+</html>
